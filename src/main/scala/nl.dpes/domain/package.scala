@@ -1,7 +1,5 @@
 package nl.dpes
 
-import nl.dpes.domain.convertor._
-
 package object domain {
   sealed trait Result
   case object Empty extends Result

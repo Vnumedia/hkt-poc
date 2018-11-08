@@ -24,6 +24,8 @@ object Demonstration extends App {
 
   val completePerson: Person[Option] = person
 
+  Address[Option](None, Some("Amsterdam"), None) |> convertOptionalAddress |> println
+
   incompletePerson |> convertOptionalPerson |> println
 
   completePerson |> convertOptionalPerson |> println
