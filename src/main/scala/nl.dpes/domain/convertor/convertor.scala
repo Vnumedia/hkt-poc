@@ -1,4 +1,4 @@
-package nl.dpes.recruiterResponse
+package nl.dpes.domain
 
 package object convertor {
   implicit def convert(from: Address[Id]): Address[Option] = Address[Option](
