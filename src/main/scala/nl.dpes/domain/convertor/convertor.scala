@@ -12,7 +12,7 @@ package object convertor {
     Some(from.lastName),
     Some(from.emailAddres),
     Some(from.phoneNumber),
-    Some(convert(from.address))
+    convert(from.address)
   )
 
   def checkValueAvailable[A](value: Option[A]): Option[ValidationError[A]] = value match {
@@ -32,18 +32,23 @@ package object convertor {
   }
 
   implicit def convertOptionalPerson(from: Person[Option]): Either[Person[OptionalValidationError], Person[Id]] = from match {
-    case Person(Some(firstName), Some(lastName), Some(emailAddres), Some(phoneNumber), Some(address)) => convertOptionalAddress(address) match {
+    case Person(Some(firstName), Some(lastName), Some(emailAddres), Some(phoneNumber), address) => convertOptionalAddress(address) match {
       case Right(address) => Right(Person[Id](firstName, lastName, emailAddres, phoneNumber, address))
-      case Left(address) => Left(Person[OptionalValidationError](None, None, None, None, None))
+      case Left(address) => Left(Person[OptionalValidationError](None, None, None, None, address))
     }
 
     case Person(firstName, lastName, emailAddres, phoneNumber, address) =>
+      val addressErrors = convertOptionalAddress(address) match {
+        case Right(address) => Address[OptionalValidationError](None, None, None)
+        case Left(address) => address
+      }
+
       Left(Person[OptionalValidationError](
         checkValueAvailable(firstName),
         checkValueAvailable(lastName),
         checkValueAvailable(emailAddres),
         checkValueAvailable(phoneNumber),
-        None
+        addressErrors
       ))
   }
 }

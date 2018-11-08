@@ -18,5 +18,5 @@ package object domain {
                           lastName: C[String],
                           emailAddres: C[String],
                           phoneNumber: C[String],
-                          address: C[Address[C]])
+                          address: Address[C])
 }
