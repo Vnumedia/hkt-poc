@@ -10,7 +10,7 @@ package object domain {
 
   type Id[T] = T
 
-  case class ValidationError[T](error: String*)
+  case class ValidationError[T](error: String)
   type OptionalValidationError[T] = Option[ValidationError[T]]
 
   case class Address[C[_]](streetNameAndHouseNumber: C[String], city: C[String], zipCode: C[String])
