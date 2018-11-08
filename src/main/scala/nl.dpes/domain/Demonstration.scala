@@ -1,7 +1,10 @@
 package nl.dpes.domain
 
 import nl.dpes.domain.convertor._
+import nl.dpes.domain.ApiProtocol._
 import nl.dpes.thrush._
+
+import spray.json._
 
 object Demonstration extends App {
   val incompleteAddress = Address[Option](None, Some("Amsterdam"), None)
@@ -18,12 +21,11 @@ object Demonstration extends App {
 
   val completePerson: Person[Option] = person
 
-//  private def toJson(value: Either[Address[OptionalValidationError], Address[Id]]) =
-//    value.toJson
-
-//  incompleteAddress |> convertOptionalAddress |> toJson
-
   incompletePerson |> convertOptionalPerson |> println
+  convertOptionalPerson(incompletePerson).toJson |> println
+
+  println("-"*30)
 
   completePerson |> convertOptionalPerson |> println
+  convertOptionalPerson(completePerson).toJson |> println
 }

@@ -16,7 +16,7 @@ package object convertor {
   )
 
   def checkValueAvailable[A](value: Option[A]): Option[ValidationError[A]] = value match {
-    case None => Some(ValidationError("is mandatory"))
+    case None => Some(ValidationError(List("is mandatory")))
     case _ => None
   }
 
