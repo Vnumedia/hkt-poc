@@ -6,7 +6,7 @@ import scala.util.Try
 
 import scalaz.-\/
 
-object FutureEither extends App {
+object ScalazFutureEither extends App {
   println(
     Try {
       Await.result(Service.deduct, Duration.Inf)
