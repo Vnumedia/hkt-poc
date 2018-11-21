@@ -12,7 +12,7 @@ package object cats_future_either {
 
     override def flatMap[A, B](fa: Future[A])(f: A => Future[B]): Future[B] = fa flatMap f
 
-    override def tailRecM[A, B](a: A)(f: A => Future[Either[A, B]]): Future[B] = ???
+    override def tailRecM[A, B](a: A)(f: A => Future[Either[A, B]]): Future[B] = f(a).map(_.right.get)
 
     override def pure[A](x: A): Future[A] = Future(x)
   }
