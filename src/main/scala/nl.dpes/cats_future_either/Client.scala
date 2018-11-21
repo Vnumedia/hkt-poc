@@ -2,8 +2,6 @@ package nl.dpes.cats_future_either
 
 import scala.concurrent.Future
 
-import scalaz.\/
-
 trait Client {
   def getCredits: Future[Either[String , Seq[String]]]
   def deductCredit(id: String): Future[Either[String, Unit]]
